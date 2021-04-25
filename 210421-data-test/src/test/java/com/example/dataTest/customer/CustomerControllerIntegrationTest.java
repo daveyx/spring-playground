@@ -28,6 +28,15 @@ public class CustomerControllerIntegrationTest {
     private ObjectMapper objectMapper;
 
 
+    @BeforeAll
+    public static void beforeAll() {
+//        for debugging: (bp must not suspend all threads)
+//        System.setProperty("java.awt.headless", "false");
+//        DatabaseManagerSwing.main(new String[]{
+//                "--url", "jdbc:hsqldb:mem:testdb", "--noexit"
+//        });
+    }
+
     @BeforeEach
     public void beforeEach() {
     }
