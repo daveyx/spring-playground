@@ -14,7 +14,8 @@ public class CustomerService {
     }
 
     public Customer getById(Long id) {
-        return customerRepository.findById(id).orElse(null);
+        Customer customer = customerRepository.findById(id).orElse(null);
+        return customer;
     }
 
     public Customer save(Customer customer) {

@@ -1,6 +1,7 @@
 package com.example.dataTest.address;
 
 import com.example.dataTest.customer.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,14 +22,15 @@ public class Address {
     private String city;
 
     @ManyToOne
+    @JsonIgnore
     private Customer customer;
 
 
     protected Address() {}
 
-    public Address(String street, String lastName, String city) {
+    public Address(String street, String zip, String city) {
         this.street = street;
-        this.zip = lastName;
+        this.zip = zip;
         this.city = city;
     }
 

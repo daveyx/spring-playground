@@ -20,7 +20,7 @@ public class Customer {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Address> addresses;
 
 
