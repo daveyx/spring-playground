@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class CustomerControllerIntegrationTest {
 
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -45,7 +45,7 @@ public class CustomerControllerIntegrationTest {
     @Order(1)
     void testSaveCustomer() throws Exception {
         Customer customer = createCustomer();
-        MvcResult mvcResult = mvc.perform(post("/customer")
+        MvcResult mvcResult = mockMvc.perform(post("/customer")
                 .content(objectMapper.writeValueAsString(customer))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -61,7 +61,7 @@ public class CustomerControllerIntegrationTest {
     @Order(2)
     void testGetCustomerById() throws Exception {
         MvcResult mvcResult
-                = mvc.perform(get("/customer/1")).andReturn();
+                = mockMvc.perform(get("/customer/1")).andReturn();
 
         String json = mvcResult.getResponse().getContentAsString();
 

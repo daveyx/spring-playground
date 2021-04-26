@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Set;
 
 
@@ -29,6 +30,10 @@ public class Customer {
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses != null ? Collections.unmodifiableSet(addresses) : Collections.emptySet();
     }
 
 }
