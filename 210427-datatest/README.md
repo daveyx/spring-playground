@@ -1,0 +1,1 @@
+* shows that hibernate can set an Id without a setter
