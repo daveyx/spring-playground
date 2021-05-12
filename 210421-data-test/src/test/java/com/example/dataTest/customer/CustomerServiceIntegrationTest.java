@@ -18,7 +18,7 @@ public class CustomerServiceIntegrationTest {
 
 
     @Test
-    void test() {
+    void test_getById_LazyInitializationException() {
         Customer customer = createCustomer();
         Address address = new Address("street1", "zip1", "city1");
         address.setCustomer(customer);
