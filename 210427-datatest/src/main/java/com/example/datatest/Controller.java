@@ -1,11 +1,7 @@
 package com.example.datatest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -14,9 +10,17 @@ import java.util.Optional;
 @RequestMapping("controller")
 public class Controller {
 
-    @Autowired
-    private Repository repository;
+    private final Repository repository;
 
+
+    public Controller(Repository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping
+    public ResponseEntity<Entity> get(@RequestParam(value = "param", required = false) String param) {
+        return null;
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<Entity> get(@PathVariable Long id) {
