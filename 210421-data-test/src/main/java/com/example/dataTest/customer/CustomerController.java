@@ -16,12 +16,12 @@ public class CustomerController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") final Long id) {
+    public ResponseEntity<Customer> getById(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(customerService.getById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> create(@RequestBody Customer customer) {
         return ResponseEntity.ok(customerService.save(customer));
     }
 

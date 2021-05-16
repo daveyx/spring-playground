@@ -54,7 +54,7 @@ public class CustomerControllerIntegrationTest {
 
     @Test
     @Order(1)
-    void testSaveCustomer() throws Exception {
+    void test_create() throws Exception {
         Customer customer = createCustomer();
         MvcResult mvcResult = mockMvc.perform(post("/customer")
                 .content(objectMapper.writeValueAsString(customer))
@@ -70,7 +70,7 @@ public class CustomerControllerIntegrationTest {
 
     @Test
     @Order(2)
-    void testGetCustomerById() throws Exception {
+    void test_get() throws Exception {
         Customer customer = customerRepository.findById(1L).orElse(null);
 
         Address address = addressRepository.save(createAddress(customer));
