@@ -49,4 +49,16 @@ public class ControllerIntegrationTest {
         return objectMapper.writeValueAsString(entity);
     }
 
+    @Test
+    void test_get() throws Exception {
+        String actual = mockMvc.perform(get("/controller")).andReturn().getResponse().getContentAsString();
+        System.out.println();
+    }
+
+    @Test
+    void test_get_withParam() throws Exception {
+        String actual = mockMvc.perform(get("/controller?param=param")).andReturn().getResponse().getContentAsString();
+        System.out.println();
+    }
+
 }

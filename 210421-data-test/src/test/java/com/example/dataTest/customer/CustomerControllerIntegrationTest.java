@@ -1,14 +1,19 @@
 package com.example.dataTest.customer;
 
+import com.example.dataTest.address.Address;
+import com.example.dataTest.address.AddressRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,6 +31,12 @@ public class CustomerControllerIntegrationTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
 
     @BeforeAll
@@ -60,22 +71,33 @@ public class CustomerControllerIntegrationTest {
     @Test
     @Order(2)
     void testGetCustomerById() throws Exception {
-        MvcResult mvcResult
-                = mockMvc.perform(get("/customer/1")).andReturn();
+        Customer customer = customerRepository.findById(1L).orElse(null);
+
+        Address address = addressRepository.save(createAddress(customer));
+        customer = createCustomer();
+        ReflectionTestUtils.setField(customer, "id", 1L);
+        ReflectionTestUtils.setField(customer, "addresses", Collections.singleton(address));
+
+        MvcResult mvcResult = mockMvc.perform(get("/customer/1")).andReturn();
 
         String json = mvcResult.getResponse().getContentAsString();
 
 //        does not work, as java.lang.Object.equals is called
 //        assertEquals(customer, objectMapper.readValue(json, Customer.class));
 
-        Customer customer = createCustomer();
-        customer.setId(1L);
-
         assertEquals(objectMapper.writeValueAsString(customer), json);
     }
 
     private Customer createCustomer() {
-        return new Customer("DareIT", "LLC");
+        Customer customer = new Customer("DareIT", "LLC");
+        return customer;
+    }
+
+    private Address createAddress(Customer customer) {
+        Address address = new Address("street", "zip", "city");
+        address.setCustomer(customer);
+
+        return address;
     }
 
 }
