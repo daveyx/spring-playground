@@ -11,7 +11,7 @@ import org.springframework.context.event.EventListener;
 public class DataTestApplication {
 
     @Autowired
-    private Repository repository;
+    private ParentRepository parentRepository;
 
 
     public static void main(String[] args) {
@@ -25,9 +25,9 @@ public class DataTestApplication {
 //        DatabaseManagerSwing.main(new String[]{
 //                "--url", "jdbc:hsqldb:mem:testdb", "--noexit"
 //        });
-        Entity entity = new Entity();
-        entity.setData("data in hsqldb");
-        repository.save(entity);
+        ParentEntity parentEntity = new ParentEntity();
+        parentEntity.setData("data in hsqldb");
+        parentRepository.save(parentEntity);
     }
 
 }

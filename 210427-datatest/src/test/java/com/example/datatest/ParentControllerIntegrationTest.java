@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerIntegrationTest {
+public class ParentControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,14 +25,14 @@ public class ControllerIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private Repository repository;
+    private ParentRepository parentRepository;
 
 
     @BeforeEach
     void beforeEach() {
-        Entity entity = new Entity();
-        entity.setData("data in hsqldb");
-        repository.save(entity);
+        ParentEntity parentEntity = new ParentEntity();
+        parentEntity.setData("data in hsqldb");
+        parentRepository.save(parentEntity);
     }
 
     @Test
@@ -43,10 +43,10 @@ public class ControllerIntegrationTest {
     }
 
     private String createExpected() throws JsonProcessingException {
-        Entity entity = new Entity();
-        entity.setData("data in hsqldb");
-        ReflectionTestUtils.setField(entity, "id", 1L);
-        return objectMapper.writeValueAsString(entity);
+        ParentEntity parentEntity = new ParentEntity();
+        parentEntity.setData("data in hsqldb");
+        ReflectionTestUtils.setField(parentEntity, "id", 1L);
+        return objectMapper.writeValueAsString(parentEntity);
     }
 
     @Test

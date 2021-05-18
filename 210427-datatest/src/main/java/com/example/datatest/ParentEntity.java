@@ -3,11 +3,13 @@ package com.example.datatest;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+
 
 @Getter
 @Setter
-@javax.persistence.Entity
-public class Entity extends AbstractEntity {
+@Entity
+public class ParentEntity extends AbstractEntity {
 
     private String data;
 
