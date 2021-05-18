@@ -1,5 +1,6 @@
-package com.example.datatest;
+package com.example.datatest.parent;
 
+import com.example.datatest.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 

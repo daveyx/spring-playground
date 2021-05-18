@@ -1,5 +1,7 @@
 package com.example.datatest;
 
+import com.example.datatest.parent.ParentEntity;
+import com.example.datatest.parent.ParentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

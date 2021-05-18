@@ -1,4 +1,4 @@
-package com.example.datatest;
+package com.example.datatest.parent;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
