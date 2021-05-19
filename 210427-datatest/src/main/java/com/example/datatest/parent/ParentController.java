@@ -7,7 +7,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("controller")
+@RequestMapping("parent")
 public class ParentController {
 
     private final ParentRepository parentRepository;

@@ -5,6 +5,7 @@ import com.example.datatest.parent.ParentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,9 +38,10 @@ public class ParentControllerIntegrationTest {
         parentRepository.save(parentEntity);
     }
 
+    @Disabled
     @Test
     void test_equals() throws Exception {
-        String actual = mockMvc.perform(get("/controller/1")).andReturn().getResponse().getContentAsString();
+        String actual = mockMvc.perform(get("/parent/1")).andReturn().getResponse().getContentAsString();
 
         assertEquals(actual, createExpected());
     }
@@ -53,13 +55,13 @@ public class ParentControllerIntegrationTest {
 
     @Test
     void test_get() throws Exception {
-        String actual = mockMvc.perform(get("/controller")).andReturn().getResponse().getContentAsString();
+        String actual = mockMvc.perform(get("/parent")).andReturn().getResponse().getContentAsString();
         System.out.println();
     }
 
     @Test
     void test_get_withParam() throws Exception {
-        String actual = mockMvc.perform(get("/controller?param=param")).andReturn().getResponse().getContentAsString();
+        String actual = mockMvc.perform(get("/parent?param=param")).andReturn().getResponse().getContentAsString();
         System.out.println();
     }
 

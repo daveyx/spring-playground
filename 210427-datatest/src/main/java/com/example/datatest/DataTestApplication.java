@@ -27,6 +27,7 @@ public class DataTestApplication {
 //        DatabaseManagerSwing.main(new String[]{
 //                "--url", "jdbc:hsqldb:mem:testdb", "--noexit"
 //        });
+
         ParentEntity parentEntity = new ParentEntity();
         parentEntity.setData("data in hsqldb");
         parentRepository.save(parentEntity);
