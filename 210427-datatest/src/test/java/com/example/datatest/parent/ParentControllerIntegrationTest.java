@@ -1,4 +1,4 @@
-package com.example.datatest;
+package com.example.datatest.parent;
 
 import com.example.datatest.parent.ParentEntity;
 import com.example.datatest.parent.ParentRepository;
