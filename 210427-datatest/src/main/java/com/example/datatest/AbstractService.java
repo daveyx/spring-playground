@@ -3,10 +3,12 @@ package com.example.datatest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 @RequiredArgsConstructor
+@Transactional
 public abstract class AbstractService<ENTITY extends AbstractEntity> {
 
     private final JpaRepository<ENTITY, Long> repository;
