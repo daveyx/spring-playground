@@ -14,6 +14,10 @@ public abstract class AbstractService<ENTITY extends AbstractEntity> {
     private final JpaRepository<ENTITY, Long> repository;
 
 
+    public ENTITY findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public List<ENTITY> findAll() {
         return repository.findAll();
     }
@@ -22,4 +26,7 @@ public abstract class AbstractService<ENTITY extends AbstractEntity> {
         return repository.save(entity);
     }
 
+    public void touch(ENTITY entity) {
+        entity.setModificationTime(null);
+    }
 }

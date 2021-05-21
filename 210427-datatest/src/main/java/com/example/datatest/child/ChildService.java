@@ -1,8 +1,11 @@
 package com.example.datatest.child;
 
 import com.example.datatest.AbstractService;
+import com.example.datatest.parent.ParentEntity;
 import com.example.datatest.parent.ParentService;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 
 @Service
@@ -19,10 +22,12 @@ public class ChildService extends AbstractService<ChildEntity> {
 
     @Override
     public ChildEntity save(ChildEntity childEntity) {
-        childEntity = super.save(childEntity);
-        parentService.save(childEntity.getParentEntity());
+        ParentEntity parentEntity = parentService.findById(childEntity.getParentEntity().getId());
+        Objects.requireNonNull(parentEntity);
 
-        return childEntity;
+        parentService.touch(parentEntity);
+
+        return super.save(childEntity);
     }
 
 }

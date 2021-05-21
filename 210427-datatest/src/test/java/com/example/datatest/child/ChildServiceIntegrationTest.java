@@ -23,13 +23,18 @@ public class ChildServiceIntegrationTest {
 
     @Test
     void test_save_modifiedParentEntityModificationTime() {
+//        for debugging: (bp must not suspend all threads)
+//        System.setProperty("java.awt.headless", "false");
+//        DatabaseManagerSwing.main(new String[]{
+//                "--url", "jdbc:hsqldb:mem:testdb", "--noexit"
+//        });
+
         ParentEntity parentEntity = parentService.findAll().get(0);
         LocalDateTime before = parentEntity.getModificationTime();
 
-        ChildEntity childEntity = new ChildEntity(parentEntity);
+        childService.save(new ChildEntity(parentEntity));
 
-        childEntity = childService.save(childEntity);
-        LocalDateTime after = childEntity.getParentEntity().getModificationTime();
+        LocalDateTime after = parentService.findById(parentEntity.getId()).getModificationTime();
 
         assertTrue(after.isAfter(before));
     }
