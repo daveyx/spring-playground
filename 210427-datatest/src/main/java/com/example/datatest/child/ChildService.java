@@ -2,7 +2,7 @@ package com.example.datatest.child;
 
 import com.example.datatest.AbstractService;
 import com.example.datatest.parent.ParentEntity;
-import com.example.datatest.parent.ParentService;
+import com.example.datatest.parent.ParentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -11,21 +11,19 @@ import java.util.Objects;
 @Service
 public class ChildService extends AbstractService<ChildEntity> {
 
-    private final ParentService parentService;
+    private final ParentRepository parentRepository;
 
 
     public ChildService(ChildRepository childRepository,
-                        ParentService parentService) {
+                        ParentRepository parentRepository) {
         super(childRepository);
-        this.parentService = parentService;
+        this.parentRepository = parentRepository;
     }
 
     @Override
     public ChildEntity save(ChildEntity childEntity) {
-        ParentEntity parentEntity = parentService.findById(childEntity.getParentEntity().getId());
+        ParentEntity parentEntity = parentRepository.findByIdForceIncrement(childEntity.getParentEntity().getId());
         Objects.requireNonNull(parentEntity);
-
-        parentService.touch(parentEntity);
 
         return super.save(childEntity);
     }
