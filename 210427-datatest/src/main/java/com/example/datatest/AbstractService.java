@@ -26,7 +26,4 @@ public abstract class AbstractService<ENTITY extends AbstractEntity> {
         return repository.save(entity);
     }
 
-    public void touch(ENTITY entity) {
-        entity.setModificationTime(null);
-    }
 }
